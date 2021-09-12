@@ -1,0 +1,62 @@
+Task 1:
+I begin by starting the target machine and attacker machine per the instructions.
+
+Task 2:
+I answer the questions presented: PORTS are the network constructs used to direct traffic to the correct application; there are 65535 ports on a network-enabled computer; and there are 1024 well-known ports.
+
+Task 3:
+I answer the questions re nmap switches:
+ -sS is the first listed switch for a Syn Scan
+ -sU starts a UDP scan
+ -O detects the target OS
+ -sV detects the version of services running on the target
+ -v increases output verbosity
+ -vv provides even more verbosity
+ -oA requests output in 3 major formats
+ -oN requests output in "Normal" formats
+ -oG requests output in "greppable" formats
+ -A requests aggressive mode
+ -T5 requests the fastest possible scan (minimum delay between attempts)
+ -p 80 indicates only scan port 80
+ -p 1000-1500 indicates scan ports between 1000 and 1500
+ -p- indicates scan all ports
+ --script requests a script from the scripting library
+ --script=vuln* requests all scripts from the vuln category
+ 
+ Task 4:
+ I reviewed the information regarding scan types.
+ 
+ Task 5:
+ I reveiewed the information regarding TCP Connect scans. RFC 793 defines appropriate behavior for the TCP protocol.
+ It provies that an attempt to open a port in the closed state should return a packet with the RST flag set.
+ 
+ Task 6:
+ I reviewed the information regarding SYN scans. These scans are also known as "half-open" or "stealth" scans. Nmap needs sudo or root access to perform a SYN scan. 
+ 
+ Task 7:
+ I reviewed the information regarding UDP scans. A UDP port that does not provide a response is shown by nmap as "open|filtered". By convention, an attempt to reach a UDP port in "closed" status should return an ICMP packet with a "port unreachable" message.
+ 
+ Task 8:
+ I reviewed the information regarding NULL, FIN and Xmas scans. The Xmas scan sends packets with the URG flag set. NULL, FIN and Xmas scans are typically used to evade firewalls. Microsoft Windows systems will typicall respond to these scans with an RST for every port.
+ 
+ Task 9:
+ I reviewed the information regarding ICMP Network Scanning. To perform a ping scan on all of the machines in the 172.16.0.0/16 network space, the command would be  "nmap -sn 172.16.0.0/16". 
+ 
+ Task 10:
+ I reviewed the overview of NSE scanning. NSE scripts are written in the Lua language. It would be a very bad idea to run scripts in the intrusive category against a production environment. 
+ 
+ Task 11:
+ I reviewed the information regarding working with the Nmap Scripting Environment. The ftp-anon script accepts an optional "maxlist" parameter indicating how many filenames should be returned when an open directory is discovered.
+Q
+ Task 12: 
+ I reviewed the Searching for Scripts information. The script which determines the underlying OS of the SMB server is "smb-os-discovery.nse". That script depends on "smb-brute".
+ 
+ Task 13:
+ I reviewed the Firewall Evasion information. ICMP packets are often blocked, requiring the use of the "-Pn" switch to suppress ICMP probing before performing further discovery. The "--data-length" switch indicates nmap should add a user-specified amount of random data to packets sent to frustrate attempts to identify nmap scans.
+ 
+ Task 14:
+ I worked through the practical exercises. The address 10.10.203.220 does not respond to ICMP ping packets. Perfoming an Xmas scan on the first 999 ports on that machine shows all ports as "open|filtered", because no responses were received for probes to those ports. A TCP SYN scan on the first 5000 ports at 10.10.203.220 revealed five open TCP ports. Using Wireshark to capture a TCP Connect scan of port 80 on 10.10.203.220 shows that the attacker machine sends a SYN packet; the target machine responds with a SYN/ACK packet; the attacker machine sends an ACK packet, immediately followed by an RST,ACK packet to shut down the TCP connection. The ftp-anon NSE script was successful in gaining anonymous access to port 21 on 10.10.203.220. 
+ 
+ Task 15:
+ I reviewed the concluding material for this final task.
+ 
