@@ -17,16 +17,16 @@ Please do a write-up of everything you do and post to your blog.
 </blockquote></p>
     <p>
 
-Task 1:
+<h3>Task 1:</h3>
 I begin by starting the target machine and attacker machine per the instructions.
 <img src="https://f000.backblazeb2.com/file/CSCI024/2021-09-11+16_10_40-Greenshot.png" width="100%"></p>
 <hr>
 
-Task 2:
+<h3>Task 2:</h3>
 I answer the questions presented: PORTS are the network constructs used to direct traffic to the correct application; there are 65535 ports on a network-enabled computer; and there are 1024 well-known ports.</p>
 <img src="https://f000.backblazeb2.com/file/CSCI024/2021-09-11+16_12_50-Greenshot.png" width="100%"></p>
 <hr>
-Task 3:
+<h3>Task 3:</h3>
 I answer the questions re nmap switches:<br>
 -sS is the first listed switch for a Syn Scan<br>
  -sU starts a UDP scan<br>
@@ -48,59 +48,59 @@ I answer the questions re nmap switches:<br>
  --script=vuln* requests all scripts from the vuln category<br>
    <img src="https://f000.backblazeb2.com/file/CSCI024/2021-09-11+16_21_34-Greenshot.png" width="100%"></p>
 <hr>   
- Task 4:
+ <h3>Task 4:</h3>
  I reviewed the information regarding scan types.
   <img src="https://f000.backblazeb2.com/file/CSCI024/2021-09-11+16_23_08-Greenshot.png" width="100%">
   <hr>
  
- Task 5:
+ <h3>Task 5:</h3>
  I reveiewed the information regarding TCP Connect scans. RFC 793 defines appropriate behavior for the TCP protocol.
  It provies that an attempt to open a port in the closed state should return a packet with the RST flag set.
   <img src="https://f000.backblazeb2.com/file/CSCI024/2021-09-11+16_24_50-Greenshot.png" width="100%">
  <hr>
  
- Task 6:
+ <h3>Task 6:</h3>
  I reviewed the information regarding SYN scans. These scans are also known as "half-open" or "stealth" scans. Nmap needs sudo or root access to perform a SYN scan. 
   <img src="https://f000.backblazeb2.com/file/CSCI024/2021-09-11+16_26_57-Greenshot.png" width="100%">
 <hr>
  
- Task 7:
+ <h3>Task 7:</h3>
  I reviewed the information regarding UDP scans. A UDP port that does not provide a response is shown by nmap as "open|filtered". By convention, an attempt to reach a UDP port in "closed" status should return an ICMP packet with a "port unreachable" message.
  <img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot+2021-09-11+19.10.11.png" width="100%">
 <hr>
   
  
- Task 8:
+ <h3>Task 8:</h3>
  I reviewed the information regarding NULL, FIN and Xmas scans. The Xmas scan sends packets with the URG flag set. NULL, FIN and Xmas scans are typically used to evade firewalls. Microsoft Windows systems will typicall respond to these scans with an RST for every port.
  <img src="https://f000.backblazeb2.com/file/CSCI024/2021-09-11+16_31_47-Greenshot.png" width="100%"> 
 <hr>
  
- Task 9:
+ <h3>Task 9:</h3>
  I reviewed the information regarding ICMP Network Scanning. To perform a ping scan on all of the machines in the 172.16.0.0/16 network space, the command would be  <pre>nmap -sn 172.16.0.0/16</pre><br>
 <img src="https://f000.backblazeb2.com/file/CSCI024/2021-09-11+16_33_52-Greenshot.png" width="100%"> 
 <hr>
  
- Task 10:
+ <h3>Task 10:</h3>
  I reviewed the overview of NSE scanning. NSE scripts are written in the Lua language. It would be a very bad idea to run scripts in the intrusive category against a production environment. <br>
  <img src="https://f000.backblazeb2.com/file/CSCI024/2021-09-11+16_35_45-Greenshot.png" width="100%">
 <hr>
   
- Task 11:
+ <h3>Task 11:</h3>
  I reviewed the information regarding working with the Nmap Scripting Environment. The ftp-anon script accepts an optional "maxlist" parameter indicating how many filenames should be returned when an open directory is discovered.<br>
  <img src="https://f000.backblazeb2.com/file/CSCI024/2021-09-11+16_38_10-Greenshot.png" width="100%">
 <hr>
 
- Task 12: 
+ <h3>Task 12:</h3> 
  I reviewed the Searching for Scripts information. The script which determines the underlying OS of the SMB server is "smb-os-discovery.nse". That script depends on "smb-brute".<br>
   <img src="https://f000.backblazeb2.com/file/CSCI024/2021-09-11+16_42_52-Greenshot.png" width="100%">
 <hr>
   
- Task 13:
+ <h3>Task 13:</h3>
  I reviewed the Firewall Evasion information. ICMP packets are often blocked, requiring the use of the "-Pn" switch to suppress ICMP probing before performing further discovery. The "--data-length" switch indicates nmap should add a user-specified amount of random data to packets sent to frustrate attempts to identify nmap scans.<br>
  <img src="https://f000.backblazeb2.com/file/CSCI024/2021-09-11+18_02_09-Greenshot.png" width="100%">
 <hr>
   
- Task 14:
+ <h3>Task 14:</h3>
  I worked through the practical exercises. The address 10.10.203.220 does not respond to ICMP ping packets. Perfoming an Xmas scan on the first 999 ports on that machine shows all ports as "open|filtered", because no responses were received for probes to those ports. A TCP SYN scan on the first 5000 ports at 10.10.203.220 revealed five open TCP ports. <br>
    <img src="https://f000.backblazeb2.com/file/CSCI024/2021-09-11+18_12_27-Greenshot.png" width="100%"><br>
    Using Wireshark to capture a TCP Connect scan of port 80 on 10.10.203.220 shows that the attacker machine sends a SYN packet; the target machine responds with a SYN/ACK packet; the attacker machine sends an ACK packet, immediately followed by an RST,ACK packet to shut down the TCP connection.<br>
@@ -111,7 +111,7 @@ I answer the questions re nmap switches:<br>
 
 <hr>
   
- Task 15:
+ <h3>Task 15:</h3>
  I reviewed the concluding material for this final task.<br>
  <img src="https://f000.backblazeb2.com/file/CSCI024/2021-09-11+18_26_53-Greenshot.png" width="100%"><br>
  <hr>
