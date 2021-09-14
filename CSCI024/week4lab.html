@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Week 3 Lab</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <h1>Week 4 Lab</h3>
+  <p><blockquote>Complete the following THM room:<br><br>
+https://tryhackme.com/room/mma<br><br>
+Please do a write-up of everything you do and post to your blog.
+</blockquote></p>
+    <p>
+
+<h3>Task 1:</h3>
+I reviewed the introductory material.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-13%2017.31.10.png" width="100%"></p>
+<hr>
+<h3>Task 2:</h3>
+I reviewed this Wikipedia page https://en.wikipedia.org/wiki/Mobile_malware and https://en.wikipedia.org/wiki/Cabir_(computer_worm) to answer questions in taxk 2. The first mobile malware was Cabir. It spread using Bluetooth technology to systems running the Symbian OS. It displayed the text "Caribe" on the screen of infected systems. <br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-13%2017.35.43.png" width="100%"></p>
+<h3>Task 3:</h3>
+I started the attack and target machines per the task instructions. I used the MobSF app to analyze the desktop file "TWFsd2FyZQ.apk". It is an .apk format file; its name decodes (using CyberChef's base64 decode module) to "Malware" and the target platform is Android. <br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-13%2017.50.12.png" width="100%"></p>
+<hr>
+<h3>Task 4:</h3>
+I submitted the SHA1 hash of the file "TWFsd2FyZQ.apk" to VirusTotal. The TryHackMe site asks for the result provided by the Avast-Mobile detection engine, which is "Android:Evo-gen [Trj]" but TryHackMe will not accept that as a correct answer. TryHackMe will accept the result provided by the Avast detection engine, which is Android:Metasploit-G [PUP]. The file was created by Metasploit. The package name is "com.metasploit.stage". The SHA-1 signature is "74d442594acf11dc6e3492ffea5eb8956afd000d". The unique XML file identified by VirusTotal is "androidmanifest.xml". The file contains 22 permissions, including "android.permission.CAMERA" which grants permission to take pictures with the camera. The CTF-style key on the discussion page is "THM{V1ru5-T0t4al-TWFsd2FyZS1BbmFseXNpcw}".<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-13%2018.08.02.png" width="100%"></p>
+<hr>
+<h3>Task 5:</h3>
+Reviewing the results of the MobSF static analysis of the file "TWFsd2FyZQ.apk", it reports that the source language that created the file was Java, and it has one signature. Because it is a v1 signature, it is vulnerable to the Janus vulnerability. The app name is MainActivity. The app contains a function, "b.getPackageManager()" that allows it to search all installed applications. The user is able to backup application data via a USB connection, which is considered a "Medium" severity configuration error.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-13%2018.27.05.png" width="100%"></p>
+<hr>
+<h3>Task 6:</h3>
+I loaded the "sample2.apk" file into MobSF. The SHA256 hash of the file is "bd8cda80aaee3e4a17e9967a1c062ac5c8e4aefd7eaa3362f54044c2c94db52a". I submitted that hash to VirusTotal and the Avast detection engine identified the file as "Android:Obfus-BM [Trj]". This file appears to contain the "Pegasus" malware. That malware was used against journalists in 2017. Searching the MITRE ATT&CK database for Pegasus' Android version reveals that the MITRE ATT&CK ID is S0316, and it uses ATT&CK technique T1404 to exploit OS vulnerabilities to escalate privileges. THe MobSF report indicates that the file requests the permission "android.permission.GET_ACCOUNTS" which is considered dangrous by MobSF. The file "org/eclipse/paho/client/mqttv3/internal/nls/messages_pt_BR.properties" refers to properties of Brazilian Portugese. The file provides random bit generation services identified by "FCS_RBG_EXT.1.1".<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-13%2018.45.37.png" width="100%"></p>
+<hr>
+<h3>Task 7:</h3>
+I reviewed the concluding material.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-13%2018.46.22.png" width="100%"><br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-13%2018.45.56.png" width="100%"></p>
+<hr>
+ </div>
+
+</body>
+</html> 
