@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Week 5 Lab</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <h1>Week 5 Lab</h3>
+  <p><blockquote>Complete the following THM room:<br><br>
+
+https://tryhackme.com/room/owasptop10 (Links to an external site.)<br><br>
+
+Please do a write-up of everything you do and post to your blog.<br>
+</blockquote></p>
+    <p>
+
+<h3>Task 1:</h3>
+I reviewed the introductory material.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-24%2009.30.52.png" width="100%"></p>
+<hr>
+<h3>Task 2:</h3>
+I reviewed the explanatory material.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-24%2009.31.13.png" width="100%"></p>
+<hr><h3>Task 3:</h3>
+I reviewed the explanatory material.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-24%2009.31.21.png" width="100%"></p>
+<hr><h3>Task 4:</h3>
+I reviewed the explanatory material.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-24%2009.31.30.png" width="100%"></p>
+<hr><h3>Task 5:</h3>
+I started the target machine and accessed the /evilshell.php webpage. I entered commands into the /evilshell.php page to answer the questions as follows:<br>
+The strange file in the web root director is drpepper.txt. I used 'cat drpepper.txt' to discover this.<br>
+There are X non-root/non-service/non-daemon users. I learned this by using 'cat /etc/passwd'.<br>
+The app is running as user www-data, per 'whoami'/<br>
+The user's shell is /usr/sbin/nologin, per 'grep www-data /etc/passwd'<br>
+The target machine is running Ubuntu 18.04.4, per "lsb_release -a".<br>
+I was retrieved the MOTD header with 'cat /etc/update-motd.d/00-header' to learn that the favorite beverage is Dr. Pepper.
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-24%2009.56.12.png" width="100%"></p>
+<hr><h3>Task 6:</h3>
+I reviewed the explanatory material.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-24%2009.56.30.png" width="100%"></p>
+<hr><h3>Task 7:</h3>
+The target machine did not have a service responding at port 8888 (tried access via browser & verified with nmap) so I restarted it. <br>
+Upon restart, the target machine did have a service running at port 8888. Per instructions, I created a user named " darren" (note leading space)
+and logged in as that user to discover the flag "fe86079416a21a3c99937fea8874b667". It was necessary to open the HTML source for the page to copy
+the flag, normal copy was apparently not functioning.<br>
+Per instructions, I also created a user named " arthur" (leading space) and logged in as that user to gain access to the flag "d9ac0f7db4fda460ac3edeb75d75e16e"
+and copied it from the HTML source as with " darren".<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-24%2010.05.34.png" width="100%"></p>
+<hr><h3>Task 8:</h3>
+I reviewed the explanatory material and started the target machine, per the instructions.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-24%2010.10.56.png" width="100%"></p>
+<hr><h3>Task 9:</h3>
+I reviewed the explanatory material.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-24%2010.11.51.png" width="100%"></p>
+<hr><h3>Task 10:</h3>
+I reviewed the explanatory material.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-24%2010.12.41.png" width="100%"></p>
+<hr><h3>Task 11:</h3>
+The instructions do not indicate a particular port/service of interest so I used nmap to discover the only open TCP port is 80.
+I accessed the service on port 80 using Firefox. It appears to be a simple webpage and includes a link to login at "/login/".
+Reviewing the HTML source for that page reveals a comment indicating that a database is stored in "/assets". That directory includes
+a file named "webapp.db". I retrieved that file using wget and opened it using sqlite 3. I accessed the list of tables and found a
+"users" table. I retrieved the table structure using "pragma_table_info(users)" and learned that the
+username is the second field and the password is the third field. I dumped the users table with
+"select * from users;" and found that the hashed password for the admin account is "6eea9b7ef19179a06954edd0f6c05ceb". I used the website "crackstation.net" to learn that the text
+"qwertyuiop" hashes to that hashed password using MD5. Logging into the web app on the target machine
+with the username "admin" and the password "qwertyuiop" reveals the flag "THM{Yzc2YjdkMjE5N2VjMzNhOTE3NjdiMjdl}".<br>
+<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-24%2010.29.52.png" width="100%"></p>
+<hr><h3>Task 12:</h3>
+I reviewed the explanatory material.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-24%2015.57.13.png" width="100%"></p>
+<hr><h3>Task 13:</h3>
+I reviewed the explanatory material.<br>
+"eXtensible Markup Language" is the full title commonly abbreviated as XML.<br>
+A prolog is not required for valid XML.<br>
+XML documents may be validated against a schema.<br>
+The XML version and encoding is typically specified in the XML prolog.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-24%2016.01.30.png" width="100%"></p>
+<hr><h3>Task 14:</h3>
+I reviewed the explanatory material.<br>
+A new element is defined with !ELEMENT.<br>
+A root element is defined with !DOCTYPE.<br>
+A new entity is defined with !ENTITY<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-24%2016.04.44.png" width="100%"></p>
+<hr><h3>Task 15:</h3>
+I reviewed the explanatory material.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-24%2016.07.01.png" width="100%"></p>
+<hr><h3>Task 16:</h3>
+I reviewed the explanatory material.<br>
+Using the example payload from the previous task, I was able to display my own name.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-24%2016.11.24.png" width="100%"><br>
+I was able to retrieve /etc/passwd from the target machine using the example payload from the previous task.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-24%2016.11.58.png" width="100%"><br>
+The ordinary user listed in the target machine's /etc/passwd is falcon.
+Falcon's ssh key is located at /home/falcon/.ssh/id_rsa and the first 18 characters of the private key
+are "MIIEogIBAAKCAQEA7bq".
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-24%2016.14.16.png" width="100%"><br>
+</p>
+<hr><h3>Task 17:</h3>
+I reviewed the explanatory material.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-25%2012.52.55.png" width="100%"></p>
+<hr><h3>Task 18:</h3>
+I reviewed the explanatory material.<br>
+The instructions indicate that I should access a machine located at http://10.10.219.151. That address is nonresponsive, but using the IP address for my target machine (10.10.91.41) I am able to access a webpage requesting credentials as suggested by the task directions. Entering the "noot" (username) and "test1234" (password) credentials as directed, the server redirects to 'http://10.10.91.41/note.php?note=1'. It appears that the username/password pair is not actually validated, as any input leads to the same note page. Experimenting with replacing the note number reveals the flag at note=0.
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-25%2012.53.23.png" width="100%">
+</p>
+<hr><h3>Task 19:</h3>
+I reviewed the introductory material and deployed the target machine.<br>
+Accessing port 80 on the target machine with Firefox reveals an installation of the "Pensive Notes" application. A Google search for "pensive notes default login" reveals that it is installed with a default user "pensive" whose password is "PensiveNotes". Logging in with those credentials reveals the flag "thm{4b9513968fd564a87b28aa1f9d672e17}".
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-24%2016.47.03.png" width="100%"></p>
+<hr><h3>Task 20:</h3>
+I reviewed the introductory material and deployed the target machine.<br>
+I clicked on the "Reflective XSS" tab on the target machine's web app, per instructions, and 
+searched for the term "&ltscript&gtalert("Hello")&lt/script&gt". Searching for that term, which was reflected in the result webpage, resulted in a popup window with the text "Hello", which revealed the flag "ThereIsMoreToXSSThanYouThink."<br><br>
+I searched for the term "&ltscript&gtalert(window.location.hostname)&lt/script&gt" which revealed the flag "ReflectiveXss4TheWin".<br><br>
+I created an account with username "x" and password "x" to test the stored XSS functions. I went to the "Stored XSS" tab and added a comment with "&ltscript&gtdocument.write("I am a cowboy")&lt/script&gt" which, while it is responsive to the task, did not result in a flag. It did make the "Stored XSS" page non-functional. I created a new user and accessed the Stored XML page which remained non-working (displaying only the "I am a cowboy" text). I terminated the target machine and respawned it.<br><br>
+I experimented with additional XSS attacks (&ltscript&gtdocument.body.append("I am still a cowboy.")&lt/script&gt and &ltscript&gtdocument.body.append("<b>I am a bold cowboy.</b>")&lt/script&gt which did add the text to the page but did not register as solving the problem. I tried adding a comment without explicit XSS but simply the text "I am a &ltb&gtreally bold&lt/b&gt cowboy." and that worked, yielding the flag "HTML_T4gs".<br><br>
+I added a comment with the contents &ltscript&gtalert(document.cookies)&lt/script&gt which produced a popup displaying the active cookies, producing the flag "W3LL_D0N3_LVL2s".<br>
+I added a comment with the contents &ltscript&gtdocument.querySelector('#thm-title').textContent='I am a hacker'&lt/script&gt yielding the flag "websites_can_be_easily_defaced_with_xss".
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-25%2013.03.24.png" width="100%"></p>
+<hr><h3>Task 21:</h3>
+I reviewed the explanatory material and answered the questions.<br>
+Tomcat is a project of the Apache Software Foundation.<br>
+A denial of service attack can be performed with insecure deserialization.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-25%2010.24.13.png" width="100%"></p>
+<hr><h3>Task 22:</h3>
+I reviewed the explanatory material and answered the question.<br>
+A sleeping dog is an example of a behavior.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-25%2010.26.40.png" width="100%"></p>
+<hr><h3>Task 23:</h3>
+I reviewed the explanatory material and answered the question.<br>
+The base-2 formatting used to send data across a network is known as binary.
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-25%2010.31.45.png" width="100%"></p>
+<hr><h3>Task 24:</h3>
+I reviewed the explanatory material and answered the questions.<br>
+If a cookie had the path of "webapp.com/login", the URL used by a user to reference that cookie would be "webapp.com/login".<br>
+The acronym for the web technology that delivers secure cookies is HTTPS.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-25%2010.33.30.png" width="100%"></p>
+<hr><h3>Task 25:</h3>
+I reviewed the explanatory material and accessed the 10.10.151.242 website as directed.<br>
+I created a new user account with username "x" and password "x". Inspecting the cookies using the Firefox developer console reveals that the "sessionid" cookie contains base64 encoded data. Decoding that using CyberChef reveals the flag "THM{good_old_base64_huh}".<br>
+Continuing with the directions, I modify the "userType" cookie from "user" to "admin" and navigate to the "/admin" page, which reveals the flag "THM{heres_the_admin_flag}".<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-25%2010.49.29.png" width="100%"></p>
+<hr><h3>Task 26:</h3>
+I reviewed the explanatory material.<br>
+I clicked on the "Exchange vim" link to populate the encodedPayload cookie. I accessed the Github URL provided but did not find any Python source. I looekd at the revision history of the page and found a short Python program that had apparently been deleted. It looked similar to the Python code referenced on the Task page so I copied it into a file on my attack machine, and modified it to include a reference to my attack machine's IP address. I opened a netcat shell on my attack machine with "nc -lvnp 4444". I ran the Python script with "python3 rce.py" and copied the encoded data output of the Python script into the encodedPayload data and reloaded the webpage. This provided me with a shell on my netcat listner. I looked at a directory listing and didn't see anything that looked like a flag. I entered "cd .." to move up one directory level and found flag.txt, which contained the string "4a69a7ff9fd68" which completed the task.
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-25%2011.05.48.png" width="100%"></p>
+<hr><h3>Task 27:</h3>
+I reviewed the explanatory material.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-25%2011.11.30.png" width="100%"></p>
+<hr><h3>Task 28:</h3>
+I reviewed the explanatory material.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-25%2011.12.13.png" width="100%"></p>
+<hr><h3>Task 29:</h3>
+I reviewed the introductory material and started the target machine.<br>
+I portscanned the target machine with "nmap -sS" which showed 2 ports open, 22 and 80. I opened Firefox and accessed the target machine at port 80. It responds with a bookstore website. Neither the HTML source nor the page itself reference identifiable software components beyond PHP and MySQL, so I ran a nmap vulnerability scan with "nmap -p 80 --script vuln 10.10.255.79". The nmap vuln scan identified a number of possible CSRF vulnerabilities, as well as a number of potentially interesting directories: "/database", "/functions", and "/template", and a potential admin folder at "/admin.php".<br>
+
+Opening "/database" reveals a directory of files, including "readme.txt.txt", whose text indicates that the default admin credentials are "admin/admin". Using those credentials provides access to an internal page that allows the upload of new book information. The "/database" directory also contains "www_project.sql", a dump of the database, which includes admin credentials ('admin', 'd033e22ae348aeb5660fc2140aec35850c4da997') for the database.<br>
+
+I performed a web search for "bookstore vulnerability" and found https://www.exploit-db.com/exploits/47887 which appeared to be a good match for this web application. I
+ran the exploit, directing it to a listening netcat process on my machine. This gave me a limited shell which could not read outside of the webroot. I used the admin page for adding new books to upload a
+better reverse shell exploit to the filename "y.txt". I used the limited webshell provided by the
+documented exploit to move/rename my reverse shell to "../../admin.php", the location of the admin page. 
+Accessing that page gave me reverse shell access as user "www-data" outside of the webroot, which allowed me to run the command "wc -c /etc/passwd" providing me with the information necessary to complete this task.
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-25%2012.18.51.png" width="100%"></p>
+<hr><h3>Task 30:</h3>
+I reviewed the explanatory material and downloaded the task file to my workstation.<br>
+Reviewing the log, it appears that an attack is coming from IP 49.99.13.16. It appears that the attacker is attempting a brute force attack using common account names.
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-25%2012.27.27.png" width="100%"></p>
+<hr><h3>Task 31:</h3>
+I reviewed the concluding material.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/Screenshot%202021-09-25%2012.31.08.png" width="100%"></p>
+<hr>
+ </div>
+
+</body>
+</html> 
