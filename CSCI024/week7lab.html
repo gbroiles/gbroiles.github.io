@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Week 7 Lab</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <h1>Week 7 Lab</h3>
+  <p><blockquote>Complete the following THM room:<br><br>
+
+https://tryhackme.com/room/rpmetasploit<br><br>
+
+Please do a write-up of everything you do and post to your blog.<br>
+</blockquote></p>
+    <p>
+
+<h3>Task 1:</h3>
+I reviewed the introductory material.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-04%2010_57_36-TryHackMe%20_%20Metasploit%20%E2%80%94%20Mozilla%20Firefox.png" width="100%"></p>
+<hr>
+<h3>Task 2:</h3>
+I reviewed the explanatory material. Metasploit can be started without banner/startup information with the "-q" command line switch. Metasploit uses the postgresql database. 
+<br><img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-04%2011_03_16-TryHackMe%20_%20Metasploit%20%E2%80%94%20Mozilla%20Firefox.png" width="100%"></p>
+<hr>
+<h3>Task 3:</h3>
+I reviewed the explanatory material. The help menu can be accessed with the question mark "?" command. The "search" command searches the available modules and exploits. The "use" command selects a module for use. The "info" command provides information about a module. The "connect" command will connect to a host/target. The "banner" command will display an ASCII graphic. The "set" command assigns a value to a variable. The "setg" command assigns a value to a global variable. A context-specific variable can be retrieved with "get" and a variable can be cleared/erased with the "unset" command. The "spool" command will save console output to a file. The "save" command records the current values to a file which can be restored later.
+<br><img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-04%2011_42_16-TryHackMe%20_%20Metasploit%20%E2%80%94%20Mozilla%20Firefox.png" width="100%"></p>
+<hr>
+<h3>Task 4:</h3>
+I reviewed the explanatory material. The "exploit" module holds individual exploit code. The "payload" module holds code to be when access has been gained. The "auxiliary" module holds code to scan/verify potential targets. The "post" module holds code which loots discovered data or facilitates pivots to another target. An "encoder" module modifies payloads to avoid signature-based detection. The "nop" module is used with buffer overflow or ROP attacks. The "load" command loads different or additional modules.
+<br><img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-04%2011_59_29-TryHackMe%20_%20Metasploit%20%E2%80%94%20Mozilla%20Firefox.png" width="100%"></p>
+<hr>
+<h3>Task 5:</h3>
+I started the target machine and reviewed the explanatory material. I ran the command "db_nmap -sV 10.10.190.182" to identify services on the target machine. It identified "msrpc" running on port 135. The "icecast" module is located at "exploit/windows/http/icecast_header". I completed the remaining steps. 
+<br><img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-04%2012_18_09-TryHackMe%20_%20Metasploit%20%E2%80%94%20Mozilla%20Firefox.png" width="100%"></p>
+<hr>
+<h3>Task 6:</h3>
+I reviewed the introductory material. The spool service is named "spoolsv.exe". The "migrate" command can be used to move to another process. The "getuid" command gets the user running the process currently in use. The "sysinfo" command provides information about the target system. The "load kiwi" command loads the newer Mimikatz module. The "upload" command sends a file to the target system. The "run" command runs a Metasploit module. The "ipconfig" command reveals information about the target system's network configuration. The "shell" command spawns a normal system shell. 
+<br><img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-04%2012_48_46-TryHackMe%20_%20Metasploit%20%E2%80%94%20Mozilla%20Firefox.png" width="100%"></p>
+<hr>
+<h3>Task 7:</h3>
+The command "run autoroute -s 172.18.1.0 -n 255.255.255.0" adds a route to 172.18.1.0/24. The full path to the socks5 auxiliary module is "auxiliary/server/socks5". The "proxychains" command forces TCP connections to go through a socks5 proxy. 
+<br><img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-04%2012_40_19-TryHackMe%20_%20Metasploit%20%E2%80%94%20Mozilla%20Firefox.png" width="100%"></p>
+<br><img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-04%2012_40_03-TryHackMe%20_%20Metasploit%20%E2%80%94%20Mozilla%20Firefox.png" width="100%"></p>
+
+ </div>
+
+</body>
+</html> 
