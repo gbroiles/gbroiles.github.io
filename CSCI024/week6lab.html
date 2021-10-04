@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Week 6 Lab</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <h1>Week 6 Lab</h3>
+  <p><blockquote>Complete the following THM room:<br><br>
+
+https://tryhackme.com/room/vulnnetinternal<br><br>
+
+Please do a write-up of everything you do and post to your blog.<br>
+</blockquote></p>
+    <p>
+
+<h3>Task 1:</h3>
+I reviewed the introductory material and started the target machine.<br>
+
+I ran an nmap TCP scan to see which ports were open with "nmap -sS -A -T5 10.10.216.111". The scan indicated that ports 22, 111, 139, 445, 873, 2049, and 9090 were responding.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-01%2012_16_47-TryHackMe%20_%20VulnNet_%20Internal%20%E2%80%94%20Mozilla%20Firefox.png" width="100%"></p>
+<hr>
+Because I saw that SMB was available on port 445, I ran nmap scripts to further explore the machine
+with "nmap -p 445 --script=smb-enum-shares.nse,smb-enum-users.nse 10.10.216.111". This revealed three 
+available shares: \IPC$, \print$, and \shares.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-01%2012_17_22-TryHackMe%20_%20VulnNet_%20Internal%20%E2%80%94%20Mozilla%20Firefox.png" width="100%"></p>
+The \shares volume is readable/writable, so I connected to it with "smbclient -U guest //10.10.216.111/shares".
+Exploring the file tree, I found three files visible and downloaded them: "/tmp/services.txt", "/data/data.txt", and "/data/business-req.txt". The file "services.txt" contained the first flag, 
+"THM{0a09d51e488f5fa105d8d866a497440a}".<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-01%2012_21_10-TryHackMe%20_%20VulnNet_%20Internal%20%E2%80%94%20Mozilla%20Firefox.png"width="100%"></p>
+Because the target machine is running an NFS daemon at port 2049, I enumerated the available shares with "showmount -e 10.10.216.111". This revealed one mount available at "/opt/conf". I mounted that
+volume to my local /mnt directory with "mount.nfs 10.10.216.111:/opt/conf /mnt". I listed all filenames in the tree with "find . -print" and viewed the files with "less". The /redis/redis.conf file contains a password, "B65Hx562F@ggAZ@F".<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-01%2012_24_29-TryHackMe%20_%20VulnNet_%20Internal%20%E2%80%94%20Mozilla%20Firefox.png" width="100%"></p>
+I accessed the running redis server on port 6379 with a command-line redis client as follows: "redis-cli -a B65Hx562F@ggAZ@F -h 10.10.216.111". I listed the existing keys with "keys *". This
+revealed several keys: "authlist", "internal flag", "marketlist", "tmp", and "int". "internal flag"
+contained a flag ("THM{ff8e518addbbddb74531a724236a8221}") which satisfiied one of the elements of the task.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-01%2012_36_34-TryHackMe%20_%20VulnNet_%20Internal%20%E2%80%94%20Mozilla%20Firefox.png" width="100%"></p><hr>
+ "authlist" contained the same string, "QXV0aG9yaXphdGlvbiBmb3IgcnN5bmM6Ly9yc3luYy1jb25uZWN0QDEyNy4wLjAuMSB3aXRoIHBhc3N3b3JkIEhjZzNIUDY3QFRXQEJjNzJ2Cg==" repeated three times. Decoding that string as a base64 encoded message using CyberChef reveals the output "Authorization for rsync://rsync-connect@127.0.0.1 with password Hcg3HP67@TW@Bc72v".<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-01%2012_40_06-From%20Base64%20-%20CyberChef%20%E2%80%94%20Mozilla%20Firefox.png" width="100%"></p><hr>
+I was able to connect to the target server using rsync and the provided username/password. Those credentials provided access to a /files subdirectory which I copied to my local machine with "rsync -av rsync://rsync-connect@10.10.216.111/files/ /tmp/rsync". The next level of the directory tree was "/sys-internal", which contained 8 directories "Desktop", "Documents", "Downloads", "Music", "Pictures", "Public", "Templates", and "Videos". It also contained a single file, "user.txt", which
+contained a flag, "THM{da7c20696831f253e0afaca8b83c07ab}", which satisfied the "user flag" question in the task.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-01%2012_47_15-TryHackMe%20_%20VulnNet_%20Internal%20%E2%80%94%20Mozilla%20Firefox.png" width="100%"></p><hr>
+The file tree includes a .ssh directory. I created an SSH keypair on my local machine and copied the id_rsa.pub public key into ".ssh/authorized_keys" in my copy of the remote server's file tree. I then copied my local changes back to the remote server with "rsync -av /tmp/rsync rsync://rsync-connect@10.10.216.111/files/". I attempted to log into the remote machine with 
+"ssh rsync-connect@10.10.216.111" and was unsuccessful; but "ssh sys-internal@10.10.216.111" was successful using the SSH private key.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-01%2012_53_30-TryHackMe%20_%20VulnNet_%20Internal%20%E2%80%94%20Mozilla%20Firefox.png" width="100%"></p><hr>
+
+This provided me with user access to the remote machine. The machine appears to be running Ubuntu 18.04 according to "lsb_release -a". Upon login, the sytem reports "541 packages can be updated. 342 updates are security updates." indicating that the system is not current on patches/updates. I created a list of SUID files with "find . -perm /4000 2> /dev/null | xargs ls -l". I did not see any immediate opportunities to exploit a SUID file so I transferred a compressed tarfile for the Lynis vulnerability scanner from my attack machine to the target machine, and ran the Lynis program. It identified a number of potential opportunities to strengthen security but did not identify any glaring oversights.<br>
+
+I executed "find / -type f 2> /dev/null | xargs grep -i password 2> /dev/null > /tmp/filelist &" which produced a list of all filex containing the text "password". The entries in this file suggest that the target machine is running a web app called "TeamCity". TeamCity appears to be a CI/CD server which can be cloud-hosted or, as in this case, locally hosted on port 8111.<br>
+
+The list of files containing the text "password" includes the following lines:<br>
+<pre>
+/TeamCity/logs/catalina.out:[TeamCity] Super user authentication token: 8446629153054945175 (use empty username with the token as the password to access the server)
+/TeamCity/logs/catalina.out:[TeamCity] Super user authentication token: 8446629153054945175 (use empty username with the token as the password to access the server)
+/TeamCity/logs/catalina.out:[TeamCity] Super user authentication token: 3782562599667957776 (use empty username with the token as the password to access the server)
+/TeamCity/logs/catalina.out:[TeamCity] Super user authentication token: 5812627377764625872 (use empty username with the token as the password to access the server)
+</pre><br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-01%2013_24_15-TryHackMe%20_%20VulnNet_%20Internal%20%E2%80%94%20Mozilla%20Firefox.png" width="100%"></p>
+I disconnected my ssh session and reconnected with "ssh -i ~/.ssh/id_rsa -L 8111:127.0.0.1:8111 sys-internal@10.10.123.179" which gave me an interactive SSH session as well as a tunnel from port 8111 on my attack machine to port 8111 on the target machine. Connecting to "127.0.0.1:8111" in my web browser brings up the TeamCity server running on port 8111 on the target machine.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-03%2021_42_50-Greenshot.png" width="100%"></p> <hr>
+ Following the instructions in the last (e.g., likely latest) log entry, I pasted each of the tokens "5812627377764625872", "3782562599667957776", and "8446629153054945175" into the password field with the username field empty.This resulted in error messages, but the login window included the boxed message "No System Administrator found. 
+Log in as a Super user to create an administrator account." where the text "Super User" was a link to <pre>http://127.0.0.1:8111/login.html?super=1</pre>. I tried the three tokens listed above without success. I reviewed the file /TeamCity/logs/catalina.out again, and noticed that several new log entries had appeared, with the message<br>
+<pre>
+[TeamCity] Super user authentication token: 3977735011700838314 (use empty username with the token as the password to access the server)
+</pre>
+I used that token on the "Super User" login page and was successful in gaining access to the TeamCity server, which apparently has not been configured or used.<br>
+
+I created a manually configured project named "Test". I skipped setting up a version control setup and created a build configuration step, called "step 1", consisting of a command line of "cp /etc/shadow /tmp". I then directed the build system to execute the step, which appeared to conclude without error. Using a terminal window, I saw that the file /tmp/shadow had been created, but its permissions did not allow me to read it. I added another build step, "Step 2", which executed the command "chmod 777 /tmp/shadow". That rendered the /tmp/shadow file readable to me, and root's password hash "$6$fEQooO2J$Gv5PA9nNgH/R1rcyVQnoPV8ssRlrOLBM6reVaJhR8N9oqrImz7PSGdsJ2l.fXmJFFibDyUx2lbuST26Meoth70" was revealed. I started processes on my local machine to attempt cracking root's password using both John the Ripper and Hashcat. While waiting for the password to crack, I modified the build Step 1 to "cp /bin/bash /bin/gbash && chmod u+s /bin/gbash" to create a new shell, "gbash", that ran SUID (as root, the shell's owner).<br><img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-03%2022_18_56-Greenshot.png" width="100%"></p> <hr>
+ I reran this build step and it completed without error. Running /bin/gbash as an ordinary user provides me with a new shell running as root. This allowed me to read /root/root.txt, revealing the flag "THM{e8996faea46df09dba5676dd271c60bd}" which completes the room.<br>
+
+
+
+<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-03%2022_20_09-Greenshot.png" width="100%"></p> 
+
+<hr>
+ </div>
+
+</body>
+</html> 
