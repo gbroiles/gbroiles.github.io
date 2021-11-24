@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Week 10 Lab</title>
+<title>Week 13 Lab</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -9,54 +9,28 @@
 </head>
 <body>
 <div class="container">
-  <h1>Week 10 Lab</h3>
-  <p><blockquote>Head over to<br>
+  <h1>Week 13 Lab</h3>
+  <p><blockquote>
+  Complete the following: <a href="https://tryhackme.com/room/githappens">https://tryhackme.com/room/githappens</a><br><br>
 
-<a href="https://inthecloud.withgoogle.com/free-training-21/register.html?utm_source=cgc-site&utm_medium=et&utm_campaign=FY21-Q4-global-NA1483-website-of-gc_free_training_october_campaign&utm_content=training_homepage&utm_term=-">https://inthecloud.withgoogle.com/free-training-21/register.html?utm_source=cgc-site&utm_medium=et&utm_campaign=FY21-Q4-global-NA1483-website-of-gc_free_training_october_campaign&utm_content=training_homepage&utm_term=-</a>
-<br>
-Sign up for the free training and pick one of the labs offered(your choice) and complete it.<br>
-Please do a write-up of everything you do and post to your blog.<br>
+Please do a write-up of everything you do and post to your blog.
 </blockquote></p>
     <p>
 
 <h3>Task 1:</h3>
-It appears that participants are required to view the "A Tour of Google Cloud Hands-On Labs" before using any 
-other lab, so I started that lab.</p>
+I started the attack machine and the target manchine.<p>
+I performed a basic nmap scan with "nmap -sS 10.10.30.123". This showed only a server operating on port 80.<p>
+Accessing port 80 with the web browser on the attack machine produced a login page.<p>
+Viewing the source of the login page in the browser revealed some complex JavaScript logic so I downloaded
+the index.html file with wget so I could inspect it more closely.<p>
+The name of the page is "Git Happens" and the descriptive text mentions version control, so I navigated to 
+<code>/.git</code> and discovered that the directory exists and is readable.<p>
+I downloaded a local copy of the .git directory with <code>wget -r http://10.10.30.123/.git/
+</code> and inspected the .git/index file using the <a href="https://github.com/sbp/gin">gin</a> utility. 
+
+
 <img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-29%2011_28_39-A%20Tour%20of%20Google%20Cloud%20Hands-on%20Labs%20_%20Google%20Cloud%20Skills%20Boost%20%E2%80%94%20Mozilla%20Firef.png" width="100%"></p>
-<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-29%2011_31_12-A%20Tour%20of%20Google%20Cloud%20Hands-on%20Labs%20_%20Google%20Cloud%20Skills%20Boost%20%E2%80%94%20Mozilla%20Firef.png" width="100%"></p>
-I followed the instructions to learn about the Dialogflow API.</p>
-<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-29%2011_38_51-Dialogflow%20API%20%E2%80%93%20APIs%20%26%20Services%20%E2%80%93%20qwiklabs-gcp-00-249%E2%80%A6%20%E2%80%93%20Google%20Cloud%20Platform%20.png" width=100%></p>
-This completed the introductory lab, which unlocked access to (some of?) the other labs.</p>
 
-<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-29%2011_41_18-A%20Tour%20of%20Google%20Cloud%20Hands-on%20Labs%20_%20Google%20Cloud%20Skills%20Boost%20%E2%80%94%20Mozilla%20Firef.png" width=100%><br>
-<hr>
-<h3>Task 2:</h3></p>
-I selected the "Creating a Virtual Machine" lab.<br>
-
-<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-29%2011_46_10-Creating%20a%20Virtual%20Machine%20_%20Google%20Cloud%20Skills%20Boost%20%E2%80%94%20Mozilla%20Firefox.png" width=100%></p>
-I created a cloud virtual machine instance in the Cloud Console following the instructions on screen.</p>
-<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-29%2011_46_01-Greenshot.png" width=100%><br>
-<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-29%2011_46_19-Creating%20a%20Virtual%20Machine%20_%20Google%20Cloud%20Skills%20Boost%20%E2%80%94%20Mozilla%20Firefox.png" width=100%><br>
-<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-29%2011_47_22-Create%20an%20instance%20%E2%80%93%20Compute%20Engine%20%E2%80%93%20qwiklabs-gcp-00-773%E2%80%A6%20%E2%80%93%20Google%20Cloud%20Platfo.png" width=100%></p>
-I logged into the console per the instructions.</p>
-<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-29%2011_49_39-student-00-3109185ef79a@gcelab_%20~%20%E2%80%94%20Mozilla%20Firefox.png" width=100%></p>
-I updated the installed software with <code>apt update</code> and installed nginx with <code>apt install nginx -y</code>.</p>
-<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-29%2011_50_52-student-00-3109185ef79a@gcelab_%20~%20%E2%80%94%20Mozilla%20Firefox.png" width=100%></p>
-I verified that nginx was running by accessing it from my web browser. </p>
-<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-29%2011_51_33-Welcome%20to%20nginx%21%20%E2%80%94%20Mozilla%20Firefox.png" width=100%></p>
-The online learning tool checked my nginx installation.</p>
-<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-29%2011_52_33-Creating%20a%20Virtual%20Machine%20_%20Google%20Cloud%20Skills%20Boost%20%E2%80%94%20Mozilla%20Firefox.png" width=100%></p>
-I opened the Cloud Shell interpreter and deployed a cloud instance from the CLI per the instructions.</pr>
-<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-29%2011_53_36-VM%20instances%20%E2%80%93%20Compute%20Engine%20%E2%80%93%20qwiklabs-gcp-00-773%E2%80%A6%20%E2%80%93%20Google%20Cloud%20Platform%20%E2%80%94%20M.png" width=100%></p>
-I verified via the web interface that there were 2 instances present.</p>
-<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-29%2011_54_46-VM%20instances%20%E2%80%93%20Compute%20Engine%20%E2%80%93%20qwiklabs-gcp-00-773%E2%80%A6%20%E2%80%93%20Google%20Cloud%20Platform%20%E2%80%94%20M.png" width=100%></p>
-I logged into the second instance using SSH from the command line after creating an SSH keypair per the instructions. </p>
-<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-29%2011_55_32-VM%20instances%20%E2%80%93%20Compute%20Engine%20%E2%80%93%20qwiklabs-gcp-00-773%E2%80%A6%20%E2%80%93%20Google%20Cloud%20Platform%20%E2%80%94%20M.png" width=100%><br>
-The online learning too verified that I had two instances running, which concluded the module.</p>
-<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-29%2011_56_08-Creating%20a%20Virtual%20Machine%20_%20Google%20Cloud%20Skills%20Boost%20%E2%80%94%20Mozilla%20Firefox.png" width=100%></p>
-<hr>
-</p>
-<hr>
  </div>
 
 </body>
