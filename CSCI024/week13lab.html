@@ -18,19 +18,32 @@ Please do a write-up of everything you do and post to your blog.
     <p>
 
 <h3>Task 1:</h3>
-I started the attack machine and the target manchine.<p>
-I performed a basic nmap scan with "nmap -sS 10.10.30.123". This showed only a server operating on port 80.<p>
+I started the attack machine and the target machine.<br>
+<img src="https://f000.backblazeb2.com/file/CSCI024/2021-11-24%2014_20_25.png" width="100%"><hr>
+<p>
+I performed a basic nmap scan with "nmap -sS 10.10.30.123". This showed only a server operating on port 80.<img src="https://f000.backblazeb2.com/file/CSCI024/2021-11-24%2014_21_48.png" width="100%"><hr>
+<p>
+
+
+
 Accessing port 80 with the web browser on the attack machine produced a login page.<p>
+<img src="https://f000.backblazeb2.com/file/CSCI024/2021-11-24%2014_22_28.png" width="100%"><hr>
 Viewing the source of the login page in the browser revealed some complex JavaScript logic so I downloaded
-the index.html file with wget so I could inspect it more closely.<p>
+the index.html file with wget so I could inspect it more closely.
+<img src="https://f000.backblazeb2.com/file/CSCI024/2021-11-24%2014_27_38.png" width="100%"><hr>
+
 The name of the page is "Git Happens" and the descriptive text mentions version control, so I navigated to 
 <code>/.git</code> and discovered that the directory exists and is readable.<p>
 I downloaded a local copy of the .git directory with <code>wget -r http://10.10.30.123/.git/
 </code> and inspected the .git/index file using the <a href="https://github.com/sbp/gin">gin</a> utility. 
-
-
-<img src="https://f000.backblazeb2.com/file/CSCI024/2021-10-29%2011_28_39-A%20Tour%20of%20Google%20Cloud%20Hands-on%20Labs%20_%20Google%20Cloud%20Skills%20Boost%20%E2%80%94%20Mozilla%20Firef.png" width="100%"></p>
-
+<img src="https://f000.backblazeb2.com/file/CSCI024/2021-11-24%2015_02_43.png" width="100%"><hr>
+I used the command <code>git log</code> to get a list of changes made to the repository.
+<img src="https://f000.backblazeb2.com/file/CSCI024/2021-11-25%2010_19_21.png" width="100%"><hr>
+The commit described by <code>395e087334d613d5e423cdf8f7be27196a360459</code> appeared to be the commit immediately before obfuscation was added, so I used the command <code>git show 395e087334d613d5e423cdf8f7be27196a360459</code> to view the changes made by that commit.
+<img src="https://f000.backblazeb2.com/file/CSCI024/2021-11-25%2010_20_50.png" width="100%"><hr>
+This revealed the plaintext password <code>This_is_4_L0ng_4nd_S3cur3_P4ssw0rd!</code>
+which completed the exercise. 
+<img src="https://f000.backblazeb2.com/file/CSCI024/2021-11-25%2010_27_15.png" width="100%"><hr>
  </div>
 
 </body>
