@@ -143,13 +143,13 @@ command and guessed that <strong><code>Tensilica Xtensa</code></strong> might be
     I used the <code>7z l -slt luggage.zip</code> command to get information about the structure and contents of the .zip file. This indicated that the <code>.zip</code> file was indeed encrypted, using the <code>ZipCrypto Store</code> algorithm.
     I searched for information about cracking <code>.zip</code> files and identified <a href="https://github.com/kimci86/bkcrack">bkcrack</a> as a potential tool which uses known plaintext to crack legacy <code>.zip</code> encryption.
     The <code>bkcrack</code> program needs a file with known plaintext and a template for password guesses. I assumed that the <code>luggage.zip</code> file would contain a MetaCTF flag, so I created a textfile with the text <code>MetaCTF{</code>.
-    I ran the bkcrack program specifying a 4 numeric digit password and my known plaintext file:<p>
+    I ran the <code>bkcracki</code> program specifying a 4 numeric digit password and my known plaintext file:<p>
 <pre style="color: lightpink; background: black;">ubuntu@oracle:~/projects/metactf/bkcrack-1.6.1-Linux$ </span><span style="color: aquamarine; background: black;">./bkcrack -c ../luggage.zip -b ?d?d?d?d -p metactf.txt</span>
-bkcrack 1.6.1 - 2024-01-22
-Data error: not enough plaintext (9 bytes available, minimum is 12).<p></pre>
+<span style="color: lightpink; background: black;">bkcrack 1.6.1 - 2024-01-22
+Data error: not enough plaintext (9 bytes available, minimum is 12).i</SPAN><p></pre>
     
     Unfortunately, the <code>bkcrack</code> program needs 12 bytes of plaintext and I only had 9 bytes of plaintext that I was confident would be inside the file, so I abandoned <code>bkcrack</code> as an attack tool.<br>
-    I searched for Python modules that open <code>.zip</code> files and identified pyminzip as a potential module. I wrote a small Python program to make attempts to open the file by cycling through all possible passwords.<p>
+    I searched for Python modules that open <code>.zip</code> files and identified <a href="https://pypi.org/project/pyminizip/"><code>pyminzip</code></a> as a potential module. I wrote a small Python program to make attempts to open the file by cycling through all possible passwords.<p>
 <div class="demo-highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyminizip</span>
 <br><span class="n">withoutpath</span> <span class="o">=</span> <span class="kc">False</span>
 
@@ -163,7 +163,7 @@ Data error: not enough plaintext (9 bytes available, minimum is 12).<p></pre>
 <span class="nb">print</span><span class="p">(</span><span class="n">success</span><span class="p">)</span>
 </pre></div><p>
     Unfortunately, it didn't work. I had about 10 minutes left before I needed to stop, so I searched for another Python module to handle <code>.zip</code> files.<br>
-    I identified <code>zipfile</code> as another potential candidate. I wrote another small Python program to use that module:<p>
+    I identified <code>zipfile</code> from the Python standard libraries as another potential candidate. I wrote another small Python program to use that module:<p>
         <div class="demo-highlight"><pre><span></span><span class="kn">import</span> <span class="nn">zipfile</span>
 
 <span class="n">target</span> <span class="o">=</span> <span class="s2">"luggage.zip"</span>
